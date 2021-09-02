@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873858502775",
+    "project_id": "never-alone-application",
+    "storage_bucket": "never-alone-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873858502775:android:e83bef38d1c681d3563672",
+        "android_client_info": {
+          "package_name": "com.farkostt.never_alone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873858502775-8o7lljq1gl24pkd3b3uh5ro647tp8sjo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs9o_lTeDytqmhX6CRXCSbYr9-44uDEpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873858502775-8o7lljq1gl24pkd3b3uh5ro647tp8sjo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
