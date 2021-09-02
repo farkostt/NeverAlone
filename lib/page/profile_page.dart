@@ -1,22 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:never_alone/model/user.dart';
-import 'package:never_alone/utils/user_preferences.dart';
-import 'package:never_alone/widget/profile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:never_alone/widget/settings_widget.dart';
 
 class ProfilePage extends StatefulWidget {
+  final User user;
+  const ProfilePage({required this.user});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isSwitched = false;
+  bool _isSendingVerification = false;
+  bool _isSigningOut = false;
+  late User _currentUser;
+
+  @override
+  void initState() {
+    _currentUser = widget.user;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
-
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -24,14 +32,17 @@ class _ProfilePageState extends State<ProfilePage> {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          ProfileWidget(
-            imagePath: user.imagePath,
-            onClicked: () async {},
+          buildImage(),
+          Text('NAME: ${_currentUser.displayName}',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+          const SizedBox(height: 4),
+          Text(
+            'NAME: ${_currentUser.email}',
+            style: TextStyle(color: Colors.grey),
           ),
           const SizedBox(
             height: 24,
           ),
-          buildName(user),
           SettingsWidget(),
         ],
       ),
@@ -39,14 +50,18 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-Widget buildName(User user) => Column(
-      children: [
-        Text(user.name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-        const SizedBox(height: 4),
-        Text(
-          user.email,
-          style: TextStyle(color: Colors.grey),
-        )
-      ],
-    );
+Widget buildImage() {
+  final image = NetworkImage('url');
+
+  return ClipOval(
+    child: Material(
+      color: Colors.transparent,
+      child: Ink.image(
+        image: image,
+        fit: BoxFit.cover,
+        width: 128,
+        height: 128,
+      ),
+    ),
+  );
+}
